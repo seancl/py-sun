@@ -4,7 +4,8 @@ AU = 1.496 * 10 ** 11
 class Body:
 	scale = 10 / AU
 
-	def __init__(self, mass, position, velocity):
+	def __init__(self, symbol, mass, position, velocity):
+		self.symbol = symbol # display character
 		self.mass = mass # in kg
 		self.pos = position # in m
 		self.vel = velocity # in m/s
@@ -35,14 +36,14 @@ class Body:
 			'y': -force * (self.pos['y'] - body.pos['y']) / distSqared ** 0.5
 		}
 
-	def draw(self, screen, char):
+	def draw(self, screen):
 		height,width = screen.getmaxyx()
 		centerX = round(width / 2)
 		centerY = round(height / 2)
 		x = centerX + round(self.pos['x'] * self.scale)
 		y = centerY - round(self.pos['y'] * self.scale)
 		if 0 <= x < width and 0 <= y < height:
-			screen.addstr(y, x, char)
+			screen.addstr(y, x, self.symbol)
 
 	def dump(self, screen, offset):
 		screen.addstr(offset + 0, 0, "mass: " + str(self.mass))
