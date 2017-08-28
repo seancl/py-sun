@@ -2,6 +2,8 @@ G = 6.67408 * 10 ** -11
 AU = 1.496 * 10 ** 11
 
 class Body:
+	scale = 10 / AU
+
 	def __init__(self, mass, position, velocity):
 		self.mass = mass # in kg
 		self.pos = position # in m
@@ -37,9 +39,8 @@ class Body:
 		height,width = screen.getmaxyx()
 		centerX = round(width / 2)
 		centerY = round(height / 2)
-		scale = 10 / AU
-		x = centerX + round(self.pos['x'] * scale)
-		y = centerY - round(self.pos['y'] * scale)
+		x = centerX + round(self.pos['x'] * self.scale)
+		y = centerY - round(self.pos['y'] * self.scale)
 		if 0 <= x < width and 0 <= y < height:
 			screen.addstr(y, x, char)
 

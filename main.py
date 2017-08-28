@@ -1,6 +1,7 @@
 from body import Body
 import time
 from curses import wrapper
+import curses
 
 def main(stdscr):
 	bodies = [
@@ -24,6 +25,7 @@ def main(stdscr):
 		Body(0.102 * 10**27, {'x': 4545.7 * 10**9, 'y': 0}, {'x': 0, 'y': 5.37 * 1000}),
 	]
 
+	stdscr.nodelay(True)
 	startTime = time.time()
 	lastTime = startTime
 	tickTimer = startTime
@@ -32,6 +34,17 @@ def main(stdscr):
 
 	while (True):
 		stdscr.clear()
+
+		try:
+			c = stdscr.getkey()
+		except curses.error:
+			pass
+		else:
+			if c == '+':
+				Body.scale *= 10
+			elif c == '-':
+				Body.scale *= 0.1
+
 		currentTime = time.time()
 		elapsedTime = (currentTime - lastTime) * 604800 # 1 sec = 1 week
 		lastTime = currentTime
