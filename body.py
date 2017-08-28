@@ -7,10 +7,13 @@ class Body:
 		self.vel = velocity # in m/s
 
 	def update(self, bodies, elapsedTime):
+		netForce = {'x': 0, 'y': 0}
 		for body in bodies:
 			accel = self.gravityVector(body)
-			self.vel['x'] += accel['x'] * elapsedTime
-			self.vel['y'] += accel['y'] * elapsedTime
+			netForce['x'] += accel['x']
+			netForce['y'] += accel['y']
+		self.vel['x'] += netForce['x'] * elapsedTime / self.mass
+		self.vel['y'] += netForce['y'] * elapsedTime / self.mass
 		self.pos['x'] += self.vel['x'] * elapsedTime
 		self.pos['y'] += self.vel['y'] * elapsedTime
 
@@ -29,9 +32,9 @@ class Body:
 			'y': -force * (self.pos['y'] - body.pos['y']) / distSqared ** 0.5
 		}
 
-	def draw(self):
-		print("mass: ", self.mass)
-		print("x: ", self.pos['x'])
-		print("y: ", self.pos['y'])
-		print("delta x: ", self.vel['x'])
-		print("delta y: ", self.vel['y'])
+	def draw(self, screen, offset):
+		screen.addstr(offset + 0, 0, "mass: " + str(self.mass))
+		screen.addstr(offset + 1, 0, "x: " + str(self.pos['x']))
+		screen.addstr(offset + 2, 0, "y: " + str(self.pos['y']))
+		screen.addstr(offset + 3, 0, "delta x: " + str(self.vel['x']))
+		screen.addstr(offset + 4, 0, "delta y: " + str(self.vel['y']))
