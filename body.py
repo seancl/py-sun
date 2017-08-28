@@ -34,10 +34,14 @@ class Body:
 		}
 
 	def draw(self, screen, char):
+		height,width = screen.getmaxyx()
+		centerX = round(width / 2)
+		centerY = round(height / 2)
 		scale = 10 / AU
-		x = self.pos['x'] * scale
-		y = self.pos['y'] * scale
-		screen.addstr(10 - round(y), 20 + round(x), char)
+		x = centerX + round(self.pos['x'] * scale)
+		y = centerY - round(self.pos['y'] * scale)
+		if 0 <= x < width && 0 <= y < height:
+			screen.addstr(y, x, char)
 
 	def dump(self, screen, offset):
 		screen.addstr(offset + 0, 0, "mass: " + str(self.mass))
