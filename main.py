@@ -21,8 +21,8 @@ def main(stdscr):
 		for body in bodies:
 			body.update(bodies, elapsedTime)
 
-		bodies[0].draw(stdscr, 0)
-		bodies[1].draw(stdscr, 6)
+		bodies[0].draw(stdscr, '0')
+		bodies[1].draw(stdscr, '1')
 
 		stdscr.addstr(20, 0, "time elapsed: " + str(currentTime - startTime))
 		stdscr.refresh()

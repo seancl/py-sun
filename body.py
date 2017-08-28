@@ -32,7 +32,10 @@ class Body:
 			'y': -force * (self.pos['y'] - body.pos['y']) / distSqared ** 0.5
 		}
 
-	def draw(self, screen, offset):
+	def draw(self, screen, char):
+		screen.addstr(10 + round(self.pos['y'] * 10), 10 + round(self.pos['x'] * 10), char)
+
+	def dump(self, screen, offset):
 		screen.addstr(offset + 0, 0, "mass: " + str(self.mass))
 		screen.addstr(offset + 1, 0, "x: " + str(self.pos['x']))
 		screen.addstr(offset + 2, 0, "y: " + str(self.pos['y']))
