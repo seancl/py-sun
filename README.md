@@ -10,4 +10,5 @@ A crude n-body simulator in Python
 
 - `-`: Zoom out
 - `+`: Zoom in
+- `=`: Alias for `+`
 - `q`: Quit
