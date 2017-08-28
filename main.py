@@ -26,12 +26,21 @@ def main(stdscr):
 
 	startTime = time.time()
 	lastTime = startTime
+	tickTimer = startTime
+	tickRate = 0
+	frameCount = 0
 
 	while (True):
 		stdscr.clear()
 		currentTime = time.time()
 		elapsedTime = (currentTime - lastTime) * 604800 # 1 sec = 1 week
 		lastTime = currentTime
+		frameCount += 1
+
+		if currentTime - tickTimer > 1:
+			tickRate = round(frameCount / (currentTime - tickTimer), 1)
+			frameCount = 0
+			tickTimer = currentTime
 
 		for body in bodies:
 			body.update(bodies, elapsedTime)
@@ -46,7 +55,8 @@ def main(stdscr):
 		bodies[7].draw(stdscr, 'u')
 		bodies[8].draw(stdscr, 'n')
 
-		stdscr.addstr(20, 0, "time elapsed: " + str(currentTime - startTime))
+		stdscr.addstr(0, 0, "time elapsed: " + str(currentTime - startTime))
+		stdscr.addstr(1, 0, "ticks / sec.: " + str(tickRate))
 		stdscr.refresh()
 
 		time.sleep(.005)
