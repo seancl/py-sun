@@ -38,10 +38,12 @@ def main(stdscr):
 		except curses.error:
 			pass
 		else:
-			if c == '+':
+			if c == '+' or c == '=':
 				Body.scale *= 2
 			elif c == '-':
 				Body.scale *= 0.5
+			elif c == 'q':
+				break
 
 		stdscr.erase()
 
