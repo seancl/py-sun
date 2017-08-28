@@ -40,7 +40,7 @@ class Body:
 		scale = 10 / AU
 		x = centerX + round(self.pos['x'] * scale)
 		y = centerY - round(self.pos['y'] * scale)
-		if 0 <= x < width && 0 <= y < height:
+		if 0 <= x < width and 0 <= y < height:
 			screen.addstr(y, x, char)
 
 	def dump(self, screen, offset):
