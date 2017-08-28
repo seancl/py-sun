@@ -5,8 +5,9 @@ from curses import wrapper
 def main(stdscr):
 	stdscr.clear()
 	bodies = [
-		Body(10, {'x': 1, 'y': 0}, {'x': 0, 'y': 0.1}),
-		Body(1000000000, {'x': 0, 'y': 0}, {'x': 0, 'y': 0})
+		Body(10, {'x': 1, 'y': 0}, {'x': 0, 'y': 0.2}),
+		Body(1000000000, {'x': 0, 'y': 0}, {'x': 0, 'y': 0}),
+		Body(10, {'x': -1, 'y': 0}, {'x': 0, 'y': -0.2})
 	]
 
 	startTime = time.time()
@@ -23,6 +24,7 @@ def main(stdscr):
 
 		bodies[0].draw(stdscr, '0')
 		bodies[1].draw(stdscr, '1')
+		bodies[2].draw(stdscr, '2')
 
 		stdscr.addstr(20, 0, "time elapsed: " + str(currentTime - startTime))
 		stdscr.refresh()
