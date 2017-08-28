@@ -33,17 +33,17 @@ def main(stdscr):
 	frameCount = 0
 
 	while (True):
-		stdscr.clear()
-
 		try:
 			c = stdscr.getkey()
 		except curses.error:
 			pass
 		else:
 			if c == '+':
-				Body.scale *= 10
+				Body.scale *= 2
 			elif c == '-':
-				Body.scale *= 0.1
+				Body.scale *= 0.5
+
+		stdscr.erase()
 
 		currentTime = time.time()
 		elapsedTime = (currentTime - lastTime) * 604800 # 1 sec = 1 week
