@@ -3,11 +3,9 @@ import time
 from curses import wrapper
 
 def main(stdscr):
-	stdscr.clear()
 	bodies = [
-		Body(10, {'x': 1, 'y': 0}, {'x': 0, 'y': 0.2}),
-		Body(1000000000, {'x': 0, 'y': 0}, {'x': 0, 'y': 0}),
-		Body(10, {'x': -1, 'y': 0}, {'x': 0, 'y': -0.2})
+		Body(1.989 * 10**30, {'x': 0, 'y': 0}, {'x': 0, 'y': 0}),
+		Body(5.972 * 10**24, {'x': 152.1 * 10**9, 'y': 0}, {'x': 0, 'y': 29.29 * 1000})
 	]
 
 	startTime = time.time()
@@ -16,15 +14,14 @@ def main(stdscr):
 	while (True):
 		stdscr.clear()
 		currentTime = time.time()
-		elapsedTime = currentTime - lastTime
+		elapsedTime = (currentTime - lastTime) * 604800 # 1 sec = 1 week
 		lastTime = currentTime
 
 		for body in bodies:
 			body.update(bodies, elapsedTime)
 
-		bodies[0].draw(stdscr, '0')
-		bodies[1].draw(stdscr, '1')
-		bodies[2].draw(stdscr, '2')
+		bodies[0].draw(stdscr, 's')
+		bodies[1].draw(stdscr, 'e')
 
 		stdscr.addstr(20, 0, "time elapsed: " + str(currentTime - startTime))
 		stdscr.refresh()

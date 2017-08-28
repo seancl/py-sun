@@ -1,4 +1,5 @@
 G = 6.67408 * 10 ** -11
+AU = 1.496 * 10 ** 11
 
 class Body:
 	def __init__(self, mass, position, velocity):
@@ -33,11 +34,14 @@ class Body:
 		}
 
 	def draw(self, screen, char):
-		screen.addstr(10 + round(self.pos['y'] * 10), 10 + round(self.pos['x'] * 10), char)
+		scale = 10 / AU
+		x = self.pos['x'] * scale
+		y = self.pos['y'] * scale
+		screen.addstr(10 - round(y), 20 + round(x), char)
 
 	def dump(self, screen, offset):
 		screen.addstr(offset + 0, 0, "mass: " + str(self.mass))
-		screen.addstr(offset + 1, 0, "x: " + str(self.pos['x']))
-		screen.addstr(offset + 2, 0, "y: " + str(self.pos['y']))
+		screen.addstr(offset + 1, 0, "x: " + str(round(self.pos['x'] / AU, 5)) + " AU")
+		screen.addstr(offset + 2, 0, "y: " + str(round(self.pos['y'] / AU, 5)) + " AU")
 		screen.addstr(offset + 3, 0, "delta x: " + str(self.vel['x']))
 		screen.addstr(offset + 4, 0, "delta y: " + str(self.vel['y']))
