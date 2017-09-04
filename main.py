@@ -49,7 +49,7 @@ def main(stdscr):
 		timer.update()
 
 		for body in bodies:
-			body.update(bodies, timer.elapsedTime)
+			body.update(bodies, timer.getElapsedTime(604800))
 			body.draw(stdscr)
 
 		timer.printStats(stdscr)

@@ -7,16 +7,19 @@ class Timer:
 		self._lastReset = self._startTime
 		self._tickRate = 0
 		self._tickCount = 0
-		self.elapsedTime = 0
+		self._elapsedTime = 0
 
 	def update(self):
 		currentTime = time.time()
-		self.elapsedTime = currentTime - self._lastTime
+		self._elapsedTime = currentTime - self._lastTime
 		self._lastTime = currentTime
 		self._tickCount += 1
 
 		if self._lastTime - self._lastReset > 1:
 			self.recomputeStats()
+
+	def getElapsedTime(self, scale=1):
+		return self._elapsedTime * scale
 
 	def recomputeStats(self):
 		self._tickRate = round(self._tickCount / (self._lastTime - self._lastReset), 1)
