@@ -1,6 +1,8 @@
 import time
 
 class Timer:
+	scale = 1.0
+
 	def __init__(self):
 		self._startTime = time.time()
 		self._lastTime = self._startTime
@@ -18,8 +20,8 @@ class Timer:
 		if self._lastTime - self._lastReset > 1:
 			self.recomputeStats()
 
-	def getElapsedTime(self, scale=1):
-		return self._elapsedTime * scale
+	def getElapsedTime(self):
+		return self._elapsedTime * self.scale
 
 	def recomputeStats(self):
 		self._tickRate = round(self._tickCount / (self._lastTime - self._lastReset), 1)
@@ -29,6 +31,7 @@ class Timer:
 	def printStats(self, screen):
 		screen.addstr(0, 0, "time elapsed: " + str(self._lastTime - self._startTime))
 		screen.addstr(1, 0, "ticks / sec.: " + str(self._tickRate))
+		screen.addstr(2, 0, "simulated seconds / sec: "  + str(self.scale))
 
 	def waitForFps(self, maxFps):
 		targetTime = 1 / maxFps

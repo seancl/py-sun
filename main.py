@@ -13,6 +13,10 @@ def checkInput(screen):
 			Body.scale *= 2
 		elif c == '-':
 			Body.scale *= 0.5
+		elif c == ']':
+			Timer.scale *= 2
+		elif c == '[':
+			Timer.scale *= 0.5
 		elif c == 'q':
 			return 'quit'
 
@@ -49,7 +53,7 @@ def main(stdscr):
 		timer.update()
 
 		for body in bodies:
-			body.update(bodies, timer.getElapsedTime(604800))
+			body.update(bodies, timer.getElapsedTime())
 			body.draw(stdscr)
 
 		timer.printStats(stdscr)
