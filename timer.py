@@ -24,5 +24,5 @@ class Timer:
 		self._lastReset = self._lastTime
 
 	def printStats(self, screen):
-		stdscr.addstr(0, 0, "time elapsed: " + str(self._lastTime - self._startTime))
-		stdscr.addstr(1, 0, "ticks / sec.: " + str(self._tickRate))
+		screen.addstr(0, 0, "time elapsed: " + str(self._lastTime - self._startTime))
+		screen.addstr(1, 0, "ticks / sec.: " + str(self._tickRate))
