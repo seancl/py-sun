@@ -1,5 +1,5 @@
 from body import Body
-import time
+from timer import Timer
 from curses import wrapper
 import curses
 
@@ -39,34 +39,20 @@ def main(stdscr):
 	]
 
 	stdscr.nodelay(True)
-	startTime = time.time()
-	lastTime = startTime
-	tickTimer = startTime
-	tickRate = 0
-	frameCount = 0
+	timer = Timer()
 
 	while (True):
 		if checkInput(stdscr) == 'quit':
 			break
 
 		stdscr.erase()
-
-		currentTime = time.time()
-		elapsedTime = (currentTime - lastTime) * 604800 # 1 sec = 1 week
-		lastTime = currentTime
-		frameCount += 1
-
-		if currentTime - tickTimer > 1:
-			tickRate = round(frameCount / (currentTime - tickTimer), 1)
-			frameCount = 0
-			tickTimer = currentTime
+		timer.update()
 
 		for body in bodies:
 			body.update(bodies, elapsedTime)
 			body.draw(stdscr)
 
-		stdscr.addstr(0, 0, "time elapsed: " + str(currentTime - startTime))
-		stdscr.addstr(1, 0, "ticks / sec.: " + str(tickRate))
+		timer.printStats(stdscr)
 		stdscr.refresh()
 
 		time.sleep(.005)
