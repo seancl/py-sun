@@ -26,3 +26,9 @@ class Timer:
 	def printStats(self, screen):
 		screen.addstr(0, 0, "time elapsed: " + str(self._lastTime - self._startTime))
 		screen.addstr(1, 0, "ticks / sec.: " + str(self._tickRate))
+
+	def waitForFps(self, maxFps):
+		targetTime = 1 / maxFps
+		actualTime = time.time() - self._lastTime
+		if actualTime < targetTime:
+			time.sleep(targetTime - actualTime)

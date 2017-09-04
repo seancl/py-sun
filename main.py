@@ -55,6 +55,6 @@ def main(stdscr):
 		timer.printStats(stdscr)
 		stdscr.refresh()
 
-		time.sleep(.005)
+		timer.waitForFps(200)
 
 wrapper(main)
