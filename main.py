@@ -22,7 +22,7 @@ def checkInput(screen):
 
 def main(stdscr):
 	# Spawn player as the moon
-	player = Body('@', 0.07346 * 10**24, {'x': 152.1 * 10**9 + 0.4055 * 10**6, 'y': 0}, {'x': 0, 'y': (29.29 + 0.97) * 1000})
+	player = Body('@', 0.07346 * 10**24, {'x': (152.1 + 0.4055) * 10**9, 'y': 0}, {'x': 0, 'y': (29.29 + 0.97) * 1000})
 
 	bodies = [
 		# Sol
