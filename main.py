@@ -53,12 +53,17 @@ def main(stdscr):
 		timer.update()
 
 		for body in bodies:
-			body.update(bodies, timer.getElapsedTime())
+			body.updateVelocity(bodies, timer.getElapsedTime())
+
+		# update positions only after all velocity calculations are done
+		for body in bodies:
+			body.updatePosition(timer.getElapsedTime())
 			body.draw(stdscr)
 
 		timer.printStats(stdscr)
 		stdscr.refresh()
 
 		timer.waitForFps(200)
+
 
 wrapper(main)

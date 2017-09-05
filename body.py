@@ -10,7 +10,7 @@ class Body:
 		self.pos = position # in m
 		self.vel = velocity # in m/s
 
-	def update(self, bodies, elapsedTime):
+	def updateVelocity(self, bodies, elapsedTime):
 		netForce = {'x': 0, 'y': 0}
 		for body in bodies:
 			accel = self.gravityVector(body)
@@ -18,6 +18,8 @@ class Body:
 			netForce['y'] += accel['y']
 		self.vel['x'] += netForce['x'] * elapsedTime / self.mass
 		self.vel['y'] += netForce['y'] * elapsedTime / self.mass
+
+	def updatePosition(self, elapsedTime):
 		self.pos['x'] += self.vel['x'] * elapsedTime
 		self.pos['y'] += self.vel['y'] * elapsedTime
 
