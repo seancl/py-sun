@@ -33,7 +33,7 @@ class Timer:
 		screen.addstr(1, 0, "ticks / sec.: " + str(self._tickRate))
 		screen.addstr(2, 0, "simulated seconds / sec: "  + str(self.scale))
 
-	def waitForFps(self, maxFps):
+	def limitFpsTo(self, maxFps):
 		targetTime = 1 / maxFps
 		actualTime = time.time() - self._lastTime
 		if actualTime < targetTime:

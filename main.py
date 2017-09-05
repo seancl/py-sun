@@ -71,7 +71,7 @@ def main(stdscr):
 		player.dump(stdscr, 4)
 		stdscr.refresh()
 
-		timer.waitForFps(200)
+		timer.limitFpsTo(200)
 
 
 wrapper(main)
