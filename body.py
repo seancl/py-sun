@@ -38,12 +38,12 @@ class Body:
 			'y': -force * (self.pos['y'] - body.pos['y']) / distSqared ** 0.5
 		}
 
-	def draw(self, screen):
+	def draw(self, screen, cameraPos):
 		height,width = screen.getmaxyx()
 		centerX = round(width / 2)
 		centerY = round(height / 2)
-		x = centerX + round(self.pos['x'] * self.scale)
-		y = centerY - round(self.pos['y'] * self.scale)
+		x = centerX + round((self.pos['x'] - cameraPos['x']) * self.scale)
+		y = centerY - round((self.pos['y'] - cameraPos['y']) * self.scale)
 		if 0 <= x < width and 0 <= y < height:
 			screen.addstr(y, x, self.symbol)
 

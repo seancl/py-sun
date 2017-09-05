@@ -21,6 +21,9 @@ def checkInput(screen):
 			return 'quit'
 
 def main(stdscr):
+	# Spawn player in low earth orbit at an altitude of 1000km
+	player = Body('@', 1, {'x': 152.1 * 10**9 + 7378, 'y': 0}, {'x': 0, 'y': (29.29 + 7.35) * 1000})
+
 	bodies = [
 		# Sol
 		Body('S', 1.989 * 10**30, {'x': 0, 'y': 0}, {'x': 0, 'y': 0}),
@@ -40,6 +43,8 @@ def main(stdscr):
 		Body('u', 86.80 * 10**24, {'x': 3003.6 * 10**9, 'y': 0}, {'x': 0, 'y': 6.49 * 1000}),
 		# Neptune at aphelion
 		Body('n', 0.102 * 10**27, {'x': 4545.7 * 10**9, 'y': 0}, {'x': 0, 'y': 5.37 * 1000}),
+		# player
+		player
 	]
 
 	stdscr.nodelay(True)
@@ -58,9 +63,10 @@ def main(stdscr):
 		# update positions only after all velocity calculations are done
 		for body in bodies:
 			body.updatePosition(timer.getElapsedTime())
-			body.draw(stdscr)
+			body.draw(stdscr, player.pos)
 
 		timer.printStats(stdscr)
+		player.dump(stdscr, 4)
 		stdscr.refresh()
 
 		timer.waitForFps(200)
