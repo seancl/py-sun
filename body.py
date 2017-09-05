@@ -2,7 +2,7 @@ G = 6.67408 * 10 ** -11
 AU = 1.496 * 10 ** 11
 
 class Body:
-	scale = 10000000 / AU
+	scale = 2**13 / AU
 
 	def __init__(self, symbol, mass, position, velocity):
 		self.symbol = symbol # display character
@@ -16,26 +16,29 @@ class Body:
 			accel = self.gravityVector(body)
 			netForce['x'] += accel['x']
 			netForce['y'] += accel['y']
-		self.vel['x'] += netForce['x'] * elapsedTime / self.mass
-		self.vel['y'] += netForce['y'] * elapsedTime / self.mass
+		self.vel['x'] += netForce['x'] * elapsedTime
+		self.vel['y'] += netForce['y'] * elapsedTime
 
 	def updatePosition(self, elapsedTime):
 		self.pos['x'] += self.vel['x'] * elapsedTime
 		self.pos['y'] += self.vel['y'] * elapsedTime
 
-	def gravityVector(self, body):
-		distSqared = (
-			(self.pos['x'] - body.pos['x']) ** 2
-			+ (self.pos['y'] - body.pos['y']) ** 2
-		)
+	def distanceTo(self, otherBody):
+		return (
+			(self.pos['x'] - otherBody.pos['x']) ** 2
+			+ (self.pos['y'] - otherBody.pos['y']) ** 2
+		) ** 0.5
 
-		if distSqared == 0:
+	def gravityVector(self, body):
+		dist = self.distanceTo(body)
+
+		if dist == 0:
 			return {'x': 0, 'y': 0}
 
-		force = G * self.mass * body.mass / distSqared
+		accel = G * body.mass / dist**2
 		return {
-			'x': -force * (self.pos['x'] - body.pos['x']) / distSqared ** 0.5,
-			'y': -force * (self.pos['y'] - body.pos['y']) / distSqared ** 0.5
+			'x': -accel * (self.pos['x'] - body.pos['x']) / dist,
+			'y': -accel * (self.pos['y'] - body.pos['y']) / dist
 		}
 
 	def draw(self, screen, cameraPos):
