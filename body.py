@@ -2,7 +2,7 @@ G = 6.67408 * 10 ** -11
 AU = 1.496 * 10 ** 11
 
 class Body:
-	scale = 10 / AU
+	scale = 10000000 / AU
 
 	def __init__(self, symbol, mass, position, velocity):
 		self.symbol = symbol # display character
