@@ -34,7 +34,7 @@ class Body:
 		height,width = screen.getmaxyx()
 		middlePoint = (round(width/2), round(height/2))
 		x,y = tuple(m + round((s - c) * self.scale) for m,s,c in zip(middlePoint, self.pos, cameraPos))
-		if 0 <= x < width and 0 <= y < height:
+		if 0 <= x < width and 0 < y <= height:
 			screen.addstr(height - y, x, self.symbol)
 
 	def dump(self, screen, offset):
